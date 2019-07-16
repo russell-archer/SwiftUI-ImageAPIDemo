@@ -9,8 +9,39 @@
 import SwiftUI
 
 struct ContentView : View {
+    @ObjectBinding var pixabayHelper = PixabayHelper()  // When our data model changes the View is invalidated and re-rendered
+    @ObjectBinding var searchText = SearchText()
+    
     var body: some View {
-        Text("Hello World")
+        pixabayHelper.loadImages(searchFor: searchText.text)
+        
+        return NavigationView {
+                VStack {
+                TextField("Search", text: self.$searchText.text)
+                    .padding()
+
+                List(pixabayHelper.imageData) { dataItem in
+                    NavigationLink(destination: Image(uiImage: self.createImage(url: dataItem.webformatURL))) {
+                        Image(uiImage: self.createImage(url: dataItem.previewURL))
+                            .resizable()
+                            .frame(width: (CGFloat)(dataItem.previewWidth), height: (CGFloat)(dataItem.previewHeight))
+                            .aspectRatio(contentMode: .fit)
+                            .cornerRadius(10)
+                    }
+                }
+            }
+            .navigationBarTitle(Text("Pixabay API"))
+        }
+    }
+    
+    /// Helper function that returns a UIImage from a URL. If the URL is invalid a default image is returned.
+    /// - Parameter url: URL of a Pixabay image preview
+    fileprivate func createImage(url: String) -> UIImage {
+        if let imageUrl = URL(string: url), let imageData = try? Data(contentsOf: imageUrl) {
+            return UIImage(data: imageData)!
+        }
+        
+        return UIImage(named: "OwlSmall")!  // Return a default image
     }
 }
 

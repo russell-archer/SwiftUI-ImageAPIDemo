@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PixabayUrl</key>
+	<string>https://pixabay.com/api/?key=</string>
+	<key>PixabayApiKey</key>
+	<string>4439321-f0ec5e18101d07750e879534f</string>
+	<key>PixabayImageType</key>
+	<string>image_type=photo</string>
+</dict>
+</plist>

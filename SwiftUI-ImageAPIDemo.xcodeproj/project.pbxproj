@@ -15,6 +15,11 @@
 		68627E3F22DA62ED008D05CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68627E3D22DA62ED008D05CC /* LaunchScreen.storyboard */; };
 		68627E4A22DA62ED008D05CC /* SwiftUI_ImageAPIDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68627E4922DA62ED008D05CC /* SwiftUI_ImageAPIDemoTests.swift */; };
 		68627E5522DA62ED008D05CC /* SwiftUI_ImageAPIDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68627E5422DA62ED008D05CC /* SwiftUI_ImageAPIDemoUITests.swift */; };
+		68627E6522DA63C4008D05CC /* Pixabay.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68627E6422DA63C4008D05CC /* Pixabay.plist */; };
+		68627E6722DA6414008D05CC /* PropertyFileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68627E6622DA6414008D05CC /* PropertyFileHelper.swift */; };
+		68627E6922DA6455008D05CC /* PixabayData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68627E6822DA6455008D05CC /* PixabayData.swift */; };
+		68627E6B22DA6480008D05CC /* PixabayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68627E6A22DA6480008D05CC /* PixabayHelper.swift */; };
+		68D699DD22DB93A7001F4D51 /* SearchText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D699DC22DB93A7001F4D51 /* SearchText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +54,11 @@
 		68627E5022DA62ED008D05CC /* SwiftUI-ImageAPIDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftUI-ImageAPIDemoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		68627E5422DA62ED008D05CC /* SwiftUI_ImageAPIDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_ImageAPIDemoUITests.swift; sourceTree = "<group>"; };
 		68627E5622DA62ED008D05CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68627E6422DA63C4008D05CC /* Pixabay.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Pixabay.plist; sourceTree = "<group>"; };
+		68627E6622DA6414008D05CC /* PropertyFileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyFileHelper.swift; sourceTree = "<group>"; };
+		68627E6822DA6455008D05CC /* PixabayData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayData.swift; sourceTree = "<group>"; };
+		68627E6A22DA6480008D05CC /* PixabayHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayHelper.swift; sourceTree = "<group>"; };
+		68D699DC22DB93A7001F4D51 /* SearchText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,12 +109,17 @@
 		68627E3122DA62EC008D05CC /* SwiftUI-ImageAPIDemo */ = {
 			isa = PBXGroup;
 			children = (
+				68627E4022DA62ED008D05CC /* Info.plist */,
+				68627E6422DA63C4008D05CC /* Pixabay.plist */,
 				68627E3222DA62EC008D05CC /* AppDelegate.swift */,
-				68627E3422DA62EC008D05CC /* SceneDelegate.swift */,
 				68627E3622DA62EC008D05CC /* ContentView.swift */,
+				68627E6822DA6455008D05CC /* PixabayData.swift */,
+				68627E6A22DA6480008D05CC /* PixabayHelper.swift */,
+				68627E6622DA6414008D05CC /* PropertyFileHelper.swift */,
+				68627E3422DA62EC008D05CC /* SceneDelegate.swift */,
+				68D699DC22DB93A7001F4D51 /* SearchText.swift */,
 				68627E3822DA62ED008D05CC /* Assets.xcassets */,
 				68627E3D22DA62ED008D05CC /* LaunchScreen.storyboard */,
-				68627E4022DA62ED008D05CC /* Info.plist */,
 				68627E3A22DA62ED008D05CC /* Preview Content */,
 			);
 			path = "SwiftUI-ImageAPIDemo";
@@ -241,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				68627E3F22DA62ED008D05CC /* LaunchScreen.storyboard in Resources */,
+				68627E6522DA63C4008D05CC /* Pixabay.plist in Resources */,
 				68627E3C22DA62ED008D05CC /* Preview Assets.xcassets in Resources */,
 				68627E3922DA62ED008D05CC /* Assets.xcassets in Resources */,
 			);
@@ -267,8 +283,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68627E6B22DA6480008D05CC /* PixabayHelper.swift in Sources */,
+				68627E6922DA6455008D05CC /* PixabayData.swift in Sources */,
 				68627E3322DA62EC008D05CC /* AppDelegate.swift in Sources */,
 				68627E3522DA62EC008D05CC /* SceneDelegate.swift in Sources */,
+				68627E6722DA6414008D05CC /* PropertyFileHelper.swift in Sources */,
+				68D699DD22DB93A7001F4D51 /* SearchText.swift in Sources */,
 				68627E3722DA62EC008D05CC /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
