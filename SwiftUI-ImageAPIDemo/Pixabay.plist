@@ -5,7 +5,7 @@
 	<key>PixabayUrl</key>
 	<string>https://pixabay.com/api/?key=</string>
 	<key>PixabayApiKey</key>
-	<string>4439321-f0ec5e18101d07750e879534f</string>
+	<string>your-api-key-goes-here</string>
 	<key>PixabayImageType</key>
 	<string>image_type=photo</string>
 </dict>
