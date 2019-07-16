@@ -16,9 +16,9 @@ Once you login to your account on Pixabay you’ll be able to see your API key i
 
 Queries are very simple. The main parameters are:
 
-**key** - Your API key
-**q** - What you’re searching for (URL encoded)
-**image_type** - The type of image you want ("all", "photo", "illustration", “vector")
+**key** - Your API key<br>
+**q** - What you’re searching for (URL encoded)<br>
+**image_type** - The type of image you want ("all", "photo", "illustration", “vector")<br>
 
 For example, we can look for "coffee" photos (the q parameter must be URL encoded) with:
 
