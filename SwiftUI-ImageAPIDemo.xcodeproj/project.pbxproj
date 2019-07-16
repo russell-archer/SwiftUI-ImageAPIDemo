@@ -19,25 +19,9 @@
 		68627E6B22DA6480008D05CC /* PixabayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68627E6A22DA6480008D05CC /* PixabayHelper.swift */; };
 		68A98C5522DE7E0E00FD268C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 68A98C5422DE7E0E00FD268C /* README.md */; };
 		68A98C5822DE7F8200FD268C /* img01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 68A98C5722DE7F8200FD268C /* img01.jpg */; };
+		68A98C5A22DE805700FD268C /* final01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 68A98C5922DE805700FD268C /* final01.jpg */; };
 		68D699DD22DB93A7001F4D51 /* SearchText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D699DC22DB93A7001F4D51 /* SearchText.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		68627E4622DA62ED008D05CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 68627E2722DA62EC008D05CC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 68627E2E22DA62EC008D05CC;
-			remoteInfo = "SwiftUI-ImageAPIDemo";
-		};
-		68627E5122DA62ED008D05CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 68627E2722DA62EC008D05CC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 68627E2E22DA62EC008D05CC;
-			remoteInfo = "SwiftUI-ImageAPIDemo";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		68627E2F22DA62EC008D05CC /* SwiftUI-ImageAPIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI-ImageAPIDemo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,33 +32,18 @@
 		68627E3B22DA62ED008D05CC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		68627E3E22DA62ED008D05CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68627E4022DA62ED008D05CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		68627E4522DA62ED008D05CC /* SwiftUI-ImageAPIDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftUI-ImageAPIDemoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		68627E5022DA62ED008D05CC /* SwiftUI-ImageAPIDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftUI-ImageAPIDemoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		68627E6422DA63C4008D05CC /* Pixabay.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Pixabay.plist; sourceTree = "<group>"; };
 		68627E6622DA6414008D05CC /* PropertyFileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyFileHelper.swift; sourceTree = "<group>"; };
 		68627E6822DA6455008D05CC /* PixabayData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayData.swift; sourceTree = "<group>"; };
 		68627E6A22DA6480008D05CC /* PixabayHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayHelper.swift; sourceTree = "<group>"; };
 		68A98C5422DE7E0E00FD268C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		68A98C5722DE7F8200FD268C /* img01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img01.jpg; sourceTree = "<group>"; };
+		68A98C5922DE805700FD268C /* final01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = final01.jpg; sourceTree = "<group>"; };
 		68D699DC22DB93A7001F4D51 /* SearchText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		68627E2C22DA62EC008D05CC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		68627E4222DA62ED008D05CC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		68627E4D22DA62ED008D05CC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -98,8 +67,6 @@
 			isa = PBXGroup;
 			children = (
 				68627E2F22DA62EC008D05CC /* SwiftUI-ImageAPIDemo.app */,
-				68627E4522DA62ED008D05CC /* SwiftUI-ImageAPIDemoTests.xctest */,
-				68627E5022DA62ED008D05CC /* SwiftUI-ImageAPIDemoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -135,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				68A98C5722DE7F8200FD268C /* img01.jpg */,
+				68A98C5922DE805700FD268C /* final01.jpg */,
 			);
 			path = "readme-assets";
 			sourceTree = "<group>";
@@ -159,42 +127,6 @@
 			productReference = 68627E2F22DA62EC008D05CC /* SwiftUI-ImageAPIDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		68627E4422DA62ED008D05CC /* SwiftUI-ImageAPIDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 68627E5C22DA62ED008D05CC /* Build configuration list for PBXNativeTarget "SwiftUI-ImageAPIDemoTests" */;
-			buildPhases = (
-				68627E4122DA62ED008D05CC /* Sources */,
-				68627E4222DA62ED008D05CC /* Frameworks */,
-				68627E4322DA62ED008D05CC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				68627E4722DA62ED008D05CC /* PBXTargetDependency */,
-			);
-			name = "SwiftUI-ImageAPIDemoTests";
-			productName = "SwiftUI-ImageAPIDemoTests";
-			productReference = 68627E4522DA62ED008D05CC /* SwiftUI-ImageAPIDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		68627E4F22DA62ED008D05CC /* SwiftUI-ImageAPIDemoUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 68627E5F22DA62ED008D05CC /* Build configuration list for PBXNativeTarget "SwiftUI-ImageAPIDemoUITests" */;
-			buildPhases = (
-				68627E4C22DA62ED008D05CC /* Sources */,
-				68627E4D22DA62ED008D05CC /* Frameworks */,
-				68627E4E22DA62ED008D05CC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				68627E5222DA62ED008D05CC /* PBXTargetDependency */,
-			);
-			name = "SwiftUI-ImageAPIDemoUITests";
-			productName = "SwiftUI-ImageAPIDemoUITests";
-			productReference = 68627E5022DA62ED008D05CC /* SwiftUI-ImageAPIDemoUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -207,14 +139,6 @@
 				TargetAttributes = {
 					68627E2E22DA62EC008D05CC = {
 						CreatedOnToolsVersion = 11.0;
-					};
-					68627E4422DA62ED008D05CC = {
-						CreatedOnToolsVersion = 11.0;
-						TestTargetID = 68627E2E22DA62EC008D05CC;
-					};
-					68627E4F22DA62ED008D05CC = {
-						CreatedOnToolsVersion = 11.0;
-						TestTargetID = 68627E2E22DA62EC008D05CC;
 					};
 				};
 			};
@@ -232,8 +156,6 @@
 			projectRoot = "";
 			targets = (
 				68627E2E22DA62EC008D05CC /* SwiftUI-ImageAPIDemo */,
-				68627E4422DA62ED008D05CC /* SwiftUI-ImageAPIDemoTests */,
-				68627E4F22DA62ED008D05CC /* SwiftUI-ImageAPIDemoUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -244,25 +166,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				68627E3F22DA62ED008D05CC /* LaunchScreen.storyboard in Resources */,
+				68A98C5A22DE805700FD268C /* final01.jpg in Resources */,
 				68627E6522DA63C4008D05CC /* Pixabay.plist in Resources */,
 				68A98C5822DE7F8200FD268C /* img01.jpg in Resources */,
 				68A98C5522DE7E0E00FD268C /* README.md in Resources */,
 				68627E3C22DA62ED008D05CC /* Preview Assets.xcassets in Resources */,
 				68627E3922DA62ED008D05CC /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		68627E4322DA62ED008D05CC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		68627E4E22DA62ED008D05CC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,34 +192,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		68627E4122DA62ED008D05CC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		68627E4C22DA62ED008D05CC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		68627E4722DA62ED008D05CC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 68627E2E22DA62EC008D05CC /* SwiftUI-ImageAPIDemo */;
-			targetProxy = 68627E4622DA62ED008D05CC /* PBXContainerItemProxy */;
-		};
-		68627E5222DA62ED008D05CC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 68627E2E22DA62EC008D05CC /* SwiftUI-ImageAPIDemo */;
-			targetProxy = 68627E5122DA62ED008D05CC /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		68627E3D22DA62ED008D05CC /* LaunchScreen.storyboard */ = {
@@ -478,88 +360,6 @@
 			};
 			name = Release;
 		};
-		68627E5D22DA62ED008D05CC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R6BE99W3FU;
-				INFOPLIST_FILE = "SwiftUI-ImageAPIDemoTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rarcher.SwiftUI-ImageAPIDemoTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUI-ImageAPIDemo.app/SwiftUI-ImageAPIDemo";
-			};
-			name = Debug;
-		};
-		68627E5E22DA62ED008D05CC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R6BE99W3FU;
-				INFOPLIST_FILE = "SwiftUI-ImageAPIDemoTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rarcher.SwiftUI-ImageAPIDemoTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUI-ImageAPIDemo.app/SwiftUI-ImageAPIDemo";
-			};
-			name = Release;
-		};
-		68627E6022DA62ED008D05CC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R6BE99W3FU;
-				INFOPLIST_FILE = "SwiftUI-ImageAPIDemoUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rarcher.SwiftUI-ImageAPIDemoUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "SwiftUI-ImageAPIDemo";
-			};
-			name = Debug;
-		};
-		68627E6122DA62ED008D05CC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R6BE99W3FU;
-				INFOPLIST_FILE = "SwiftUI-ImageAPIDemoUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rarcher.SwiftUI-ImageAPIDemoUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "SwiftUI-ImageAPIDemo";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -577,24 +377,6 @@
 			buildConfigurations = (
 				68627E5A22DA62ED008D05CC /* Debug */,
 				68627E5B22DA62ED008D05CC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		68627E5C22DA62ED008D05CC /* Build configuration list for PBXNativeTarget "SwiftUI-ImageAPIDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				68627E5D22DA62ED008D05CC /* Debug */,
-				68627E5E22DA62ED008D05CC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		68627E5F22DA62ED008D05CC /* Build configuration list for PBXNativeTarget "SwiftUI-ImageAPIDemoUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				68627E6022DA62ED008D05CC /* Debug */,
-				68627E6122DA62ED008D05CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
