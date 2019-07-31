@@ -43,6 +43,7 @@ class PixabayHelper: ObservableObject {
 
         pixabayUrl += pixabayApiKey + "&" + pixabayImageType + "&" + pixabayResultPerPage + "&q=" + searchFor
         
+        // Use the dataTaskPublisher(for:) Combine extension on URLSession to request data asynchronously
         let _ = URLSession.shared.dataTaskPublisher(for: URLRequest(url: URL(string: pixabayUrl)!))
             .receive(on: RunLoop.main)  // The whole chain fails without this!
             .tryMap { data, response -> Data in

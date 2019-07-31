@@ -1,11 +1,16 @@
 # SwiftUI-ImageAPIDemo
-Using SwiftUI to consume REST API with image data
+## Using SwiftUI and Combine to consume REST API image data
+**(Updated for Xcode 11 Beta 5)**
 
 ![](./readme-assets/final01.png)
 
-In this simple SwiftUI demo we create a simple iOS app that requests image data from Pixabay (https://pixabay.com) using its free REST-based API that returns JSON data.
+In this SwiftUI and Combine demo I create a simple iOS app that requests image data from Pixabay (https://pixabay.com) using its free REST-based API that returns JSON data.
+**SwiftUI** is used to create the UI and the new **Combine** framework is used to asynchronously request and decode JSON image data.
+
+The source shows the completed final version of the app. The text below provides details on how the app was created.
 
 ___
+
 ## Get a free Pixabay account
 First, register for an account at https://pixabay.com/en/accounts/register/
 
@@ -78,19 +83,19 @@ public struct PixabayImage: Decodable, Identifiable {
 ```
 
 * A class named **PixabayHelper**
-    * Used to make data requests to the REST API
-    * Decode the incoming JSON data and store it in a **pixabayData** private property
-    * Makes the **PixabayData.hits** array of **PixabayImage** data available via a public **imageData** property
-    * Conforms to the SwiftUI **BindableObject** protocol. This allows it to notify subscribers when data has been downloaded from Pixabay
-
+    * Used to make data requests to the REST API via a **Combine** extension **dataTaskPublisher(for:)** on **URLSession** 
+    * Decodes the incoming JSON data and caches it in a **pixabayData** property
+    * Makes the **PixabayData.hits** array of **PixabayImage** data available via a public **@Published imageData** property. Publishing imageData ensures that when it changes the **View** in **ContentView** is re-rendered
+    * Conforms to the SwiftUI **BindableObject** protocol. This allows **ContentView** to subscribe to changes via a **@ObservedObject PixabayHelper** property
+    
 * Main **ContentView** struct
-    * Will show a collection of preview images from the Pixabay data using a **List**
-    * Also shows a **TextField** allowing a search term to by entered
-    * Holds a **@ObjectBinding** var of **PixabayHelper**. When the data model (**imageData**) changes the **View** is invalidated and re-rendered
+    * Will show a collection of preview images from the Pixabay data using a SwiftUI **List**
+    * Displays a **TextField** and **Button** allowing a search term to be entered
+    * Holds a **@ObservedObject PixabayHelper** property. When the data (**imageData**) changes the **View** is invalidated and re-rendered
 
-* We’ll store static query string elements in a .plist file and use a class **PropertyFileHelper** to help retrieve values. This avoids having to hard-code items like the unique API key
-* When the user taps on a preview image we show the full image in a separate view
-* The user can enter a search term for the images to be retrieved. Note that SwiftUI does not yet support the equivalent of **UISearchController** so we create our own simple alternative
+* We store static query string elements in a .plist file and use a class **PropertyFileHelper** to help retrieve values. This avoids having to hard-code items like the unique API key
+* When the user taps on a preview image we show the full image in a separate detail view
+* The user enters a search term for the images to be retrieved. Note that SwiftUI does not yet support the equivalent of **UISearchController** so we create our own simple alternative
 
 ___
 
@@ -307,109 +312,60 @@ Create a class named PixabayHelper in a file named **PixabayHelper.swift**:
 //  Created by Russell Archer on 13/07/2019.
 //  Copyright © 2019 Russell Archer. All rights reserved.
 //
+//  Example Pixabay query: https://pixabay.com/api/?key=key-here&image_type=photo&per_page=5&q=coffee
+//
 
 import Foundation
 import UIKit
 import SwiftUI
 import Combine
 
-class PixabayHelper: BindableObject {
+class PixabayHelper: ObservableObject {
     fileprivate let plistHelper = PropertyFileHelper(file: "Pixabay")  // Allows us access to the Pixabay.plist config file
     fileprivate var pixabayData: PixabayData?  // Holds decoded JSON data loaded from Pixabay
     fileprivate var currentSearchText = ""
+    fileprivate enum networkError: Error { case statusCodeIndicatesError }
     
-    public var didChange = PassthroughSubject<Void, Never>()  // Allows us to publish a change message to subscribers
-    public var imageData: [PixabayImage] {  // Image data from Pixabay, or a default if no data has been loaded       
-        return pixabayData == nil ? [PixabayImage(imageName: "OwlSmall")] : pixabayData!.hits
+    // Configuration data
+    fileprivate var pixabayUrl: String
+    fileprivate let pixabayApiKey: String
+    fileprivate let pixabayImageType: String
+    fileprivate let pixabayResultPerPage: String
+    
+    /// This published imageData ensures that when the data changes the View in ContentView is re-rendered
+    @Published public var imageData: [PixabayImage] = [PixabayImage(imageName: "OwlSmall")]
+    
+    init() {
+        pixabayUrl = plistHelper.readProperty(key: "PixabayUrl")!
+        pixabayApiKey = plistHelper.readProperty(key: "PixabayApiKey")!
+        pixabayImageType = plistHelper.readProperty(key: "PixabayImageType")!
+        pixabayResultPerPage = plistHelper.readProperty(key: "PixabayResultsPerPage")!
     }
     
-    /// Gets image data from the Pixabay REST API. Notifies subscribers if data is successfully loaded
+    /// Gets image data from the Pixabay REST API
     /// - Parameter searchFor: The kind of image to search for
     public func loadImages(searchFor: String) {
-        guard searchFor.count > 2 else { return }
-        guard plistHelper.hasLoadedProperties else { return }
-        
         if searchFor == currentSearchText { return }
         currentSearchText = searchFor
+
+        pixabayUrl += pixabayApiKey + "&" + pixabayImageType + "&" + pixabayResultPerPage + "&q=" + searchFor
         
-        print("Loading data from Pixabay...")
-        // Example query: https://pixabay.com/api/?key=your-api-key&image_type=photo&q=coffee
-        guard var pixabayUrl = plistHelper.readProperty(key: "PixabayUrl") else { return }
-        guard let pixabayApiKey = plistHelper.readProperty(key: "PixabayApiKey") else { return }
-        guard let pixabayImageType = plistHelper.readProperty(key: "PixabayImageType") else { return }
-        
-        pixabayUrl += pixabayApiKey + "&" + pixabayImageType + "&q=" + searchFor
-        
-        let url = URL(string: pixabayUrl)!
-        let session = URLSession.shared
-        let task = session.dataTask(with: url) { [weak self] (json, response, error) in
-            guard let self = self else { return }
-            guard json != nil else { return }
-            let httpResponse = response as! HTTPURLResponse
-            print("HTTP response status code: \(httpResponse.statusCode)")  // 200 == OK
-            
-            guard httpResponse.statusCode == 200 else {
-                print("The HTTP response status code indicates there was an error")
-                return
+        // Use the dataTaskPublisher(for:) Combine extension on URLSession to request data asynchronously
+        let _ = URLSession.shared.dataTaskPublisher(for: URLRequest(url: URL(string: pixabayUrl)!))
+            .receive(on: RunLoop.main)  // The whole chain fails without this!
+            .tryMap { data, response -> Data in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                    throw networkError.statusCodeIndicatesError
+                }
+
+                return data  // Pick off just the JSON data
             }
-            
-            // This is the type-safe method of parsing the JSON.
-            // See the model PixabayData used to map the JSON
-            let decoder = JSONDecoder()
-            let dataModelType = PixabayData.self
-            self.pixabayData = try? decoder.decode(dataModelType, from: json!)
-            
-            guard self.pixabayData != nil else { return }
-            
-            DispatchQueue.main.async(execute: {
-                // Let subscribers know the data has changed.
-                // Because we're currently not running on the main thread we explicitly call
-                // on the main thread in case they try to update the UI
-                self.didChange.send()
+            .decode(type: PixabayData.self, decoder: JSONDecoder())  // Decode the JSON using our PixabayData model
+            .sink(receiveCompletion: { _ in }, receiveValue: { decodedData in
+                // Cache the received and decoded data
+                self.pixabayData = decodedData
+                self.imageData = self.pixabayData == nil ? [PixabayImage(imageName: "OwlSmall")] : self.pixabayData!.hits
             })
-        }
-        task.resume()
-    }
-}
-```
-
-Notice the use of the **JSONDecoder** class. We can call its **decode()** method and supply the anticipated incoming model for the JSON by passing the **Type** for our PixabayData model:
-
-``` swift
-let decoder = JSONDecoder()
-let dataModelType = PixabayData.self
-self.pixabayData = try? decoder.decode(dataModelType, from: json!)
-```
-
-___
-
-## Create a BindableObject for entering search text
-Create a new .swift file named **SearchText.swift**:
-
-``` swift
-//
-//  SearchText.swift
-//  SwiftUI-ImageAPIDemo
-//
-//  Created by Russell Archer on 14/07/2019.
-//  Copyright © 2019 Russell Archer. All rights reserved.
-//
-
-import Foundation
-import SwiftUI
-import Combine
-
-/// A BindableObject that allows us to subscribe to changes to a String that is bound to a TextField.
-/// A simpler approach would be to have a @State String var with a didSet property observer. However,
-/// this doesn't seem to be supported (the didSet is never called) in SwiftUI currently (Xcode 11 Beta 3)
-class SearchText: BindableObject {
-    public var didChange = PassthroughSubject<Void, Never>()
-    
-    public var text = "kittens" {
-        didSet {
-            print("Search text changed to: \(text)")
-            didChange.send()
-        }
     }
 }
 ```
@@ -427,28 +383,42 @@ Open **ContentView.swift** and add the following:
 //  Created by Russell Archer on 13/07/2019.
 //  Copyright © 2019 Russell Archer. All rights reserved.
 //
+//  Updated for Xcode Beta 5
+//      -   @ObjectBinding deprecated for @ObservedObject
+//      -   BindableObject protocol deprecated for ObservableObject in PixabayHelper
+//      -   Refactored PixabayHelper.loadImages(searchFor:) to use the Combine framework extension dataTaskPublisher on URLSession
+//      -   Refactored PixabayHelper to @Published imageData
 
 import SwiftUI
 
 struct ContentView : View {
-    // When our data model changes the View is invalidated and re-rendered
-    @ObjectBinding var pixabayHelper = PixabayHelper()  
-    @ObjectBinding var searchText = SearchText()
+    @ObservedObject var pixabayHelper = PixabayHelper()  // When our data model changes the View is invalidated and re-rendered
+    @State fileprivate var searchText = ""
     
     var body: some View {
-        pixabayHelper.loadImages(searchFor: searchText.text)  // Load image data via REST API
-        
-        return VStack {
-            TextField("Search", text: self.$searchText.text)
-                .padding()
-
-            List(pixabayHelper.imageData) { dataItem in
-                Image(uiImage: self.createImage(url: dataItem.previewURL))
-                .resizable()
-                .frame(width: (CGFloat)(dataItem.previewWidth), height: (CGFloat)(dataItem.previewHeight))
-                .aspectRatio(contentMode: .fit)
-                .cornerRadius(10)
+        NavigationView {
+            VStack {
+                HStack {
+                    TextField("Enter search term", text: $searchText).padding()
+                    
+                    Button(action: {
+                        self.pixabayHelper.loadImages(searchFor: self.searchText)
+                    }) {
+                        Image(systemName: "magnifyingglass").font(.largeTitle)
+                    }
+                    .padding()
+                }
+                
+                List(pixabayHelper.imageData) { dataItem in
+                    NavigationLink(destination: Image(uiImage: self.createImage(url: dataItem.webformatURL))) {
+                        Image(uiImage: self.createImage(url: dataItem.previewURL))
+                            .resizable()
+                            .frame(width: (CGFloat)(dataItem.previewWidth), height: (CGFloat)(dataItem.previewHeight))
+                            .aspectRatio(contentMode: .fit)
+                    }
+                }
             }
+            .navigationBarTitle(Text("Pixabay API"))
         }
     }
     
@@ -474,46 +444,14 @@ struct ContentView_Previews : PreviewProvider {
 
 ___
 
-## Run the app
-Running the app produces:
-
-![](./readme-assets/final01.png)
-
-___
-
-## Add navigation
-Adding navigation support to show a bigger detail image is simple.
+Note that we've include navigation support to show a bigger detail image.
 
 Wrap the existing **VStack** in a **NavigationView** (equivalent of UIKit **UINavigationController**).
-Now wrap the **Image** displayed in the **List** in a **NavigationLink**.
+Wrap the **Image** displayed in the **List** in a **NavigationLink**.
 
 Note that when the navigation link is tapped the destination is simply an **Image**. This works because the **NavigationLink** destination can be any object that conforms to the **View** protocol.
 
-``` swift
-var body: some View {
-    pixabayHelper.loadImages(searchFor: searchText.text)
-        
-    return NavigationView {
-        VStack {
-            TextField("Search", text: self.$searchText.text)
-                .padding()
-
-            List(pixabayHelper.imageData) { dataItem in
-                NavigationLink(destination: Image(uiImage: self.createImage(url: dataItem.webformatURL))) {
-                    Image(uiImage: self.createImage(url: dataItem.previewURL))
-                        .resizable()
-                        .frame(width: (CGFloat)(dataItem.previewWidth), height: (CGFloat)(dataItem.previewHeight))
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(10)
-                }
-            }
-        }
-        .navigationBarTitle(Text("Pixabay API"))
-    }
-}
-```
-
-The app now looks like this:
+Running the app produces:
 
 ![](./readme-assets/final01.png)
 

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftUI
 
 public struct PixabayData: Decodable {
     public var totalHits: Int
