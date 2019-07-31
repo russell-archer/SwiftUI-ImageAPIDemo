@@ -5,6 +5,8 @@
 //  Created by Russell Archer on 13/07/2019.
 //  Copyright © 2019 Russell Archer. All rights reserved.
 //
+//  Example Pixabay query: https://pixabay.com/api/?key=key-here&image_type=photo&per_page=5&q=coffee
+//
 
 import Foundation
 import UIKit
@@ -15,32 +17,33 @@ class PixabayHelper: ObservableObject {
     fileprivate let plistHelper = PropertyFileHelper(file: "Pixabay")  // Allows us access to the Pixabay.plist config file
     fileprivate var pixabayData: PixabayData?  // Holds decoded JSON data loaded from Pixabay
     fileprivate var currentSearchText = ""
-  
+    fileprivate enum networkError: Error { case statusCodeIndicatesError }
+    
+    // Configuration data
+    fileprivate var pixabayUrl: String
+    fileprivate let pixabayApiKey: String
+    fileprivate let pixabayImageType: String
+    fileprivate let pixabayResultPerPage: String
+    
+    /// This published imageData ensures that when the data changes the View in ContentView is re-rendered
     @Published public var imageData: [PixabayImage] = [PixabayImage(imageName: "OwlSmall")]
     
-    /// Gets image data from the Pixabay REST API. Notifies subscribers if data is successfully loaded
+    init() {
+        pixabayUrl = plistHelper.readProperty(key: "PixabayUrl")!
+        pixabayApiKey = plistHelper.readProperty(key: "PixabayApiKey")!
+        pixabayImageType = plistHelper.readProperty(key: "PixabayImageType")!
+        pixabayResultPerPage = plistHelper.readProperty(key: "PixabayResultsPerPage")!
+    }
+    
+    /// Gets image data from the Pixabay REST API
     /// - Parameter searchFor: The kind of image to search for
     public func loadImages(searchFor: String) {
-        guard searchFor.count > 2 else { return }
-        guard plistHelper.hasLoadedProperties else { return }
-        
         if searchFor == currentSearchText { return }
         currentSearchText = searchFor
-        
-        print("Loading images of \(searchFor) from Pixabay...")
 
-        // Example query: https://pixabay.com/api/?key=key-here&image_type=photo&per_page=5&q=coffee
-        guard var pixabayUrl = plistHelper.readProperty(key: "PixabayUrl") else { return }
-        guard let pixabayApiKey = plistHelper.readProperty(key: "PixabayApiKey") else { return }
-        guard let pixabayImageType = plistHelper.readProperty(key: "PixabayImageType") else { return }
-        guard let pixabayResultPerPage = plistHelper.readProperty(key: "PixabayResultsPerPage") else { return }
-        
         pixabayUrl += pixabayApiKey + "&" + pixabayImageType + "&" + pixabayResultPerPage + "&q=" + searchFor
         
-        let request = URLRequest(url: URL(string: pixabayUrl)!)
-        enum networkError: Error { case statusCodeIndicatesError }
-        
-        let _ = URLSession.shared.dataTaskPublisher(for: request)
+        let _ = URLSession.shared.dataTaskPublisher(for: URLRequest(url: URL(string: pixabayUrl)!))
             .receive(on: RunLoop.main)  // The whole chain fails without this!
             .tryMap { data, response -> Data in
                 guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
@@ -55,29 +58,41 @@ class PixabayHelper: ObservableObject {
                 self.pixabayData = decodedData
                 self.imageData = self.pixabayData == nil ? [PixabayImage(imageName: "OwlSmall")] : self.pixabayData!.hits
             })
-        
-//        let task = session.dataTask(with: url) { [weak self] (json, response, error) in
-//            guard let self = self else { return }
-//            guard json != nil else { return }
-//            let httpResponse = response as! HTTPURLResponse
-//            print("HTTP response status code: \(httpResponse.statusCode)")  // 200 == OK
-//
-//            guard httpResponse.statusCode == 200 else {
-//                print("The HTTP response status code indicates there was an error")
-//                return
-//            }
-//
-//            // This is the type-safe method of parsing the JSON.
-//            // See the model PixabayData used to map the JSON
-//            let decoder = JSONDecoder()
-//            let dataModelType = PixabayData.self
-//            self.pixabayData = try? decoder.decode(dataModelType, from: json!)
-//
-//            DispatchQueue.main.async {
-//                self.imageData = self.pixabayData == nil ? [PixabayImage(imageName: "OwlSmall")] : self.pixabayData!.hits
-//            }
-//        }
-//
-//        task.resume()
     }
 }
+
+/*
+    Previous pre-Combine version of loadImages(searchFor:)
+ 
+     public func loadImages(searchFor: String) {
+         if searchFor == currentSearchText { return }
+         currentSearchText = searchFor
+
+         pixabayUrl += pixabayApiKey + "&" + pixabayImageType + "&" + pixabayResultPerPage + "&q=" + searchFor
+         
+         let task = session.dataTask(with: URL(string: pixabayUrl)!) { [weak self] (json, response, error) in
+             guard let self = self else { return }
+             guard json != nil else { return }
+             let httpResponse = response as! HTTPURLResponse
+             print("HTTP response status code: \(httpResponse.statusCode)")  // 200 == OK
+ 
+             guard httpResponse.statusCode == 200 else {
+                 print("The HTTP response status code indicates there was an error")
+                 return
+             }
+ 
+             // This is the type-safe method of parsing the JSON.
+             // See the model PixabayData used to map the JSON
+             let decoder = JSONDecoder()
+             let dataModelType = PixabayData.self
+             self.pixabayData = try? decoder.decode(dataModelType, from: json!)
+ 
+             DispatchQueue.main.async {
+                 self.imageData = self.pixabayData == nil ? [PixabayImage(imageName: "OwlSmall")] : self.pixabayData!.hits
+             }
+         }
+ 
+         task.resume()
+     }
+ 
+ */

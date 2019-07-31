@@ -11,14 +11,14 @@ import UIKit
 
 /*
  
- PropertyFileHelper reads the contents of a .plist file and allows you to read individual
- properties by their keys.
+    PropertyFileHelper reads the contents of a .plist file and allows you to read individual
+    properties by their keys.
  
- Example usage:
+    Example usage:
  
- let _plistHelper = PropertyFileHelper(file: "MyPlistFile")  // Note: No .plist file extn
- guard _plistHelper.hasLoadedProperties else { return }
- guard var myValue = _plistHelper.readProperty(key: "MyKey") else { return }
+    let _plistHelper = PropertyFileHelper(file: "MyPlistFile")  // Note: No .plist file extn
+    guard _plistHelper.hasLoadedProperties else { return }
+    guard var myValue = _plistHelper.readProperty(key: "MyKey") else { return }
  
  */
 

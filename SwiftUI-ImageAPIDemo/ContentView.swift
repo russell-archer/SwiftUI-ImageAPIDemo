@@ -9,6 +9,7 @@
 //      -   @ObjectBinding deprecated for @ObservedObject
 //      -   BindableObject protocol deprecated for ObservableObject
 //      -   ObservableObject protocol requires objectWillChange property (publisher)
+//      -   Refactored PixabayHelper.loadImages(searchFor:) to use the Combine framework with URLSession dataTaskPublisher
 
 import SwiftUI
 
