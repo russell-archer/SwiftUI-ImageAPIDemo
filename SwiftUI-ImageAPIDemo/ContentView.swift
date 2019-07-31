@@ -5,28 +5,37 @@
 //  Created by Russell Archer on 13/07/2019.
 //  Copyright © 2019 Russell Archer. All rights reserved.
 //
+//  Updated for Xcode Beta 5
+//      -   @ObjectBinding deprecated for @ObservedObject
+//      -   BindableObject protocol deprecated for ObservableObject
+//      -   ObservableObject protocol requires objectWillChange property (publisher)
 
 import SwiftUI
 
 struct ContentView : View {
-    @ObjectBinding var pixabayHelper = PixabayHelper()  // When our data model changes the View is invalidated and re-rendered
-    @ObjectBinding var searchText = SearchText()
+    @ObservedObject var pixabayHelper = PixabayHelper()  // When our data model changes the View is invalidated and re-rendered
+    @State fileprivate var searchText = ""
     
     var body: some View {
-        pixabayHelper.loadImages(searchFor: searchText.text)
-        
-        return NavigationView {
-                VStack {
-                TextField("Search", text: self.$searchText.text)
+        NavigationView {
+            VStack {
+                HStack {
+                    TextField("Enter search term", text: $searchText).padding()
+                    
+                    Button(action: {
+                        self.pixabayHelper.loadImages(searchFor: self.searchText)
+                    }) {
+                        Image(systemName: "magnifyingglass").font(.largeTitle)
+                    }
                     .padding()
-
+                }
+                
                 List(pixabayHelper.imageData) { dataItem in
                     NavigationLink(destination: Image(uiImage: self.createImage(url: dataItem.webformatURL))) {
                         Image(uiImage: self.createImage(url: dataItem.previewURL))
                             .resizable()
                             .frame(width: (CGFloat)(dataItem.previewWidth), height: (CGFloat)(dataItem.previewHeight))
                             .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
                     }
                 }
             }
