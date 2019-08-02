@@ -45,7 +45,7 @@ class PixabayHelper: ObservableObject {
         
         // Use the dataTaskPublisher(for:) Combine extension on URLSession to request data asynchronously
         let _ = URLSession.shared.dataTaskPublisher(for: URLRequest(url: URL(string: pixabayUrl)!))
-            .receive(on: RunLoop.main)  // The whole chain fails without this!
+            .receive(on: RunLoop.main)  // Downstream messages will be handled on the main thread. The whole chain fails without this!
             .tryMap { data, response -> Data in
                 guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
                     throw networkError.statusCodeIndicatesError
