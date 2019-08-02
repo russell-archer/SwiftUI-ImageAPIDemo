@@ -7,7 +7,7 @@ In this SwiftUI and Combine demo I create a simple iOS app that requests image d
 
 The source shows the completed final version of the app. The text below provides details on how the app was created.
 
-![](./readme-assets/final01.png) ![](./readme-assets/img06.jpg)
+![](./readme-assets/img00.jpg)
 
 ___
 

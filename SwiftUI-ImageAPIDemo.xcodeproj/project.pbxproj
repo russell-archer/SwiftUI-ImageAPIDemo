@@ -26,6 +26,7 @@
 		68A98C6222DE853400FD268C /* img05.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 68A98C6122DE853400FD268C /* img05.jpg */; };
 		68A98C6422DE8B1F00FD268C /* final02.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A98C6322DE8B1F00FD268C /* final02.png */; };
 		68C4C56C22F4F459004FA376 /* img06.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 68C4C56B22F4F459004FA376 /* img06.jpg */; };
+		68C4C56E22F4F5C0004FA376 /* img00.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 68C4C56D22F4F5C0004FA376 /* img00.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		68A98C6122DE853400FD268C /* img05.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img05.jpg; sourceTree = "<group>"; };
 		68A98C6322DE8B1F00FD268C /* final02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = final02.png; sourceTree = "<group>"; };
 		68C4C56B22F4F459004FA376 /* img06.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img06.jpg; sourceTree = "<group>"; };
+		68C4C56D22F4F5C0004FA376 /* img00.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img00.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 		68A98C5622DE7E5400FD268C /* readme-assets */ = {
 			isa = PBXGroup;
 			children = (
+				68C4C56D22F4F5C0004FA376 /* img00.jpg */,
 				68A98C5722DE7F8200FD268C /* img01.jpg */,
 				68A98C5B22DE82AE00FD268C /* img02.jpg */,
 				68A98C5C22DE82AE00FD268C /* img03.jpg */,
@@ -185,6 +188,7 @@
 				68C4C56C22F4F459004FA376 /* img06.jpg in Resources */,
 				68627E6522DA63C4008D05CC /* Pixabay.plist in Resources */,
 				68A98C5822DE7F8200FD268C /* img01.jpg in Resources */,
+				68C4C56E22F4F5C0004FA376 /* img00.jpg in Resources */,
 				68A98C6222DE853400FD268C /* img05.jpg in Resources */,
 				68A98C5522DE7E0E00FD268C /* README.md in Resources */,
 				68A98C6422DE8B1F00FD268C /* final02.png in Resources */,
