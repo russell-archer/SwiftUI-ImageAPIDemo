@@ -10,6 +10,11 @@
 //      -   BindableObject protocol deprecated for ObservableObject in PixabayHelper
 //      -   Refactored PixabayHelper.loadImages(searchFor:) to use the Combine framework extension dataTaskPublisher on URLSession
 //      -   Refactored PixabayHelper to @Published imageData
+//
+// ---------------------------------------------------------
+//
+// Tested and working with Xcode 11 Beta 6 on Mojave 10.14.6
+//
 
 import SwiftUI
 
