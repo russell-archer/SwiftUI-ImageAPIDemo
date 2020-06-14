@@ -8,7 +8,5 @@
 	<string>4439321-f0ec5e18101d07750e879534f</string>
 	<key>PixabayImageType</key>
 	<string>image_type=photo</string>
-	<key>PixabayResultsPerPage</key>
-	<string>per_page=5</string>
 </dict>
 </plist>

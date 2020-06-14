@@ -1,6 +1,6 @@
 # SwiftUI-ImageAPIDemo
 ## Using SwiftUI and Combine to consume REST API image data
-**(Updated for Xcode 11 Beta 6)**
+**(Updated for Xcode 11 Beta 7)**
 
 In this SwiftUI and Combine demo I create a simple iOS app that requests image data from Pixabay (https://pixabay.com) using its free REST-based API that returns JSON data.
 **SwiftUI** is used to create the UI and the new **Combine** framework is used to asynchronously request and decode JSON image data.

@@ -13,7 +13,7 @@
 //
 // ---------------------------------------------------------
 //
-// Tested and working with Xcode 11 Beta 6 on Mojave 10.14.6
+// Tested and working with Xcode 11 Beta 7 on Mojave 10.14.6
 //
 
 import SwiftUI
